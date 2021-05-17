@@ -1,25 +1,26 @@
 import { Component, OnInit } from '@angular/core';
+import { Site } from '../shared/models/tracktick.models';
 import { DataService } from '../shared/services/data/data.service';
 
 @Component({
   selector: 'app-grid',
   templateUrl: './grid.component.html',
-  styleUrls: ['./grid.component.css'],
+  styleUrls: ['./grid.component.scss'],
 })
 export class GridComponent implements OnInit {
+  rowData: Site[] = null;
+
   constructor(private dataService: DataService) {}
 
-  ngOnInit(): void {
-    this.dataService.getSites().subscribe((data) => {
-      console.log(data);
+  ngOnInit() {
+    this.dataService.getSites().then((data: Site[]) => {
+      this.rowData = data;
     });
+
+
+
   }
 
-  columnDefs = [{ field: 'make' }, { field: 'model' }, { field: 'price' }];
+  columnDefs = [{ field: 'title' }, { field: 'clientId' }];
 
-  rowData = [
-    { make: 'Toyota', model: 'Celica', price: 35000 },
-    { make: 'Ford', model: 'Mondeo', price: 32000 },
-    { make: 'Porsche', model: 'Boxter', price: 72000 },
-  ];
 }
