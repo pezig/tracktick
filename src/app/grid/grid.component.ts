@@ -3,18 +3,20 @@ import { FormControl } from '@angular/forms';
 import { GridApi, GridOptions } from 'ag-grid-community';
 import { Site } from '../shared/models/tracktick.models';
 import { SitesInfoComponent } from '../shared/renderers/sites/sites-info/sites-info.component';
+import { SitesOpenComponent } from '../shared/renderers/sites/sites-open/sites-open.component';
 import { DataService } from '../shared/services/data/data.service';
 
 @Component({
   selector: 'app-grid',
   template: ` <label>
-    <input
-      type="text"
-      id="filter-text-box"
-      placeholder="Filter..."
-      [formControl]="filterText"
-      (input)="onFilterTextBoxChanged()" />
-
+      <input
+        type="text"
+        id="filter-text-box"
+        placeholder="Filter..."
+        [formControl]="filterText"
+        (input)="onFilterTextBoxChanged()"
+      />
+    </label>
     <ag-grid-angular
       style="width: 100%; height: 500px;"
       class="ag-theme-alpine"
@@ -27,8 +29,7 @@ import { DataService } from '../shared/services/data/data.service';
       (gridReady)="onGridReady($event)"
       [getRowHeight]="getRowHeight"
     >
-    </ag-grid-angular
-  ></label>`,
+    </ag-grid-angular>`,
   styleUrls: ['./grid.component.scss'],
 })
 export class GridComponent implements OnInit {
@@ -49,6 +50,7 @@ export class GridComponent implements OnInit {
 
     this.frameworkComponents = {
       siteInfo: SitesInfoComponent,
+      siteOpen: SitesOpenComponent,
     };
 
     this.gridOptions = {
@@ -62,7 +64,7 @@ export class GridComponent implements OnInit {
   }
 
   columnDefs = [
-    { field: 'title', width: '30px' },
+    { field: 'title', width: '5%' },
     {
       field: 'clientId',
       cellRenderer: 'siteInfo',
@@ -83,10 +85,12 @@ export class GridComponent implements OnInit {
           site.contacts.main.lastName
         );
       },
+      width: '80%',
     },
     {
       field: '',
-      width: '30px',
+      cellRenderer: 'siteOpen',
+      width: '10%',
     },
   ];
 
@@ -97,7 +101,7 @@ export class GridComponent implements OnInit {
   onGridReady(params) {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
-    // this.gridOptions.api.sizeColumnsToFit();
+    this.gridOptions.api.sizeColumnsToFit();
     this.gridApi.sizeColumnsToFit();
   }
 }
