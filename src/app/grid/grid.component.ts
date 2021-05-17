@@ -1,14 +1,44 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { GridApi, GridOptions } from 'ag-grid-community';
 import { Site } from '../shared/models/tracktick.models';
+import { SitesInfoComponent } from '../shared/renderers/sites/sites-info/sites-info.component';
 import { DataService } from '../shared/services/data/data.service';
 
 @Component({
   selector: 'app-grid',
-  templateUrl: './grid.component.html',
+  template: ` <label>
+    <input
+      type="text"
+      id="filter-text-box"
+      placeholder="Filter..."
+      [formControl]="filterText"
+      (input)="onFilterTextBoxChanged()" />
+
+    <ag-grid-angular
+      style="width: 100%; height: 500px;"
+      class="ag-theme-alpine"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      [gridOptions]="gridOptions"
+      [frameworkComponents]="frameworkComponents"
+      [pagination]="true"
+      [paginationPageSize]="paginationPageSize"
+      (gridReady)="onGridReady($event)"
+      [getRowHeight]="getRowHeight"
+    >
+    </ag-grid-angular
+  ></label>`,
   styleUrls: ['./grid.component.scss'],
 })
 export class GridComponent implements OnInit {
   rowData: Site[] = null;
+  gridOptions: GridOptions | null = null;
+  frameworkComponents: any = null;
+  gridApi: GridApi | null = null;
+  gridColumnApi = null;
+  paginationPageSize = 50;
+  filterText: FormControl = null;
 
   constructor(private dataService: DataService) {}
 
@@ -17,10 +47,57 @@ export class GridComponent implements OnInit {
       this.rowData = data;
     });
 
+    this.frameworkComponents = {
+      siteInfo: SitesInfoComponent,
+    };
 
-
+    this.gridOptions = {
+      cacheQuickFilter: true,
+    };
+    this.filterText = new FormControl('');
   }
 
-  columnDefs = [{ field: 'title' }, { field: 'clientId' }];
+  getRowHeight(params) {
+    return 70;
+  }
 
+  columnDefs = [
+    { field: 'title', width: '30px' },
+    {
+      field: 'clientId',
+      cellRenderer: 'siteInfo',
+      cellStyle: {
+        padding: '5px 0px',
+      },
+      getQuickFilterText: function (params): string {
+        let site = params.data;
+        return (
+          site.title +
+          ' ' +
+          site.address.city +
+          ', ' +
+          site.address.state +
+          ' ' +
+          site.contacts.main.firstName +
+          ' ' +
+          site.contacts.main.lastName
+        );
+      },
+    },
+    {
+      field: '',
+      width: '30px',
+    },
+  ];
+
+  onFilterTextBoxChanged() {
+    this.gridOptions.api.setQuickFilter(this.filterText.value);
+  }
+
+  onGridReady(params) {
+    this.gridApi = params.api;
+    this.gridColumnApi = params.columnApi;
+    // this.gridOptions.api.sizeColumnsToFit();
+    this.gridApi.sizeColumnsToFit();
+  }
 }

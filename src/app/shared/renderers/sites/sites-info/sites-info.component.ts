@@ -1,20 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { ICellRendererParams } from 'ag-grid-community';
+import { Site } from 'src/app/shared/models/tracktick.models';
 
 @Component({
   selector: 'app-sites-info',
-  templateUrl: './sites-info.component.html',
-  styleUrls: ['./sites-info.component.scss']
+  template: `
+    <div>{{ siteName }}</div>
+    <div>{{ siteAddress }}</div>
+    <div>{{ mainContact }}</div>
+  `,
+  styleUrls: ['./sites-info.component.scss'],
 })
-export class SitesInfoComponent implements ICellRendererAngularComp{
+export class SitesInfoComponent implements ICellRendererAngularComp {
+  siteName = '';
+  siteAddress = '';
+  mainContact = '';
+  private site: Site = null;
 
   agInit(params: any) {
-
+    this.site = params.data;
+    this.siteName = this.site.title;
+    this.siteAddress = this.site.address.city + ', ' + this.site.address.state;
+    this.mainContact =
+      this.site.contacts.main.firstName +
+      ' ' +
+      this.site.contacts.main.lastName;
   }
 
-  refresh(params: ICellRendererParams): boolean{
+  refresh(params: ICellRendererParams): boolean {
     return false;
   }
-
 }
