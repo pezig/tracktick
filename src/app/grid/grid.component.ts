@@ -90,7 +90,10 @@ export class GridComponent implements OnInit {
     {
       field: '',
       cellRenderer: 'siteOpen',
-      width: '10%',
+      width: '10px',
+      cellStyle: {
+        padding: '18px 0px',
+      },
     },
   ];
 
