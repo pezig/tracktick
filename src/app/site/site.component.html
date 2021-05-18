@@ -1,12 +1,34 @@
-<ag-grid-angular
-  style="width: 500px; height: 400px"
-  class="ag-theme-alpine"
-  [rowData]="rowData"
-  [columnDefs]="columnDefs"
-  [frameworkComponents]="frameworkComponents"
-  [pagination]="true"
-  [paginationPageSize]="paginationPageSize"
-  (gridReady)="onGridReady($event)"
-  [getRowHeight]="getRowHeight"
->
-</ag-grid-angular>
+<mat-card class="card">
+  <a routerLink="/">
+    <mat-card-content>
+      <img src="assets/icons/arrow-left.svg" alt="Click to go back" />
+    </mat-card-content>
+  </a>
+  <mat-card-content>
+    <mat-card-title>{{ site.title }}</mat-card-title>
+  </mat-card-content>
+  <mat-card-content>
+    <img src="assets/icons/person-badge.svg" />
+    {{ site.contacts.main.firstName + " " + site.contacts.main.lastName }}
+    <br />
+    <small> {{ site.contacts.main.jobTitle }} </small>
+  </mat-card-content>
+  <mat-card-content>
+    <img src="assets/icons/telephone-fill.svg" />
+    {{ site.contacts.main.phoneNumber }}
+  </mat-card-content>
+  <mat-card-content>
+    <img src="assets/icons/envelope.svg" />
+    {{ site.contacts.main.email }}
+  </mat-card-content>
+  <mat-card-content>
+    <img src="assets/icons/pin-map.svg" />
+    <div>
+      {{ address.street }}
+      <br />
+      {{ address.city + ", " + address.state + ", " + address.country }}
+      <br />
+      {{ address.zipCode }}
+    </div>
+  </mat-card-content>
+</mat-card>
