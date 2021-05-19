@@ -5,7 +5,9 @@ import { ProjectStateService } from 'src/app/shared/services/project-state/proje
 import { Site } from 'src/app/shared/models/tracktick.models';
 @Component({
   selector: 'app-sites-open',
-  templateUrl: './sites-open.component.html',
+  template: `<a (click)="navigate()">
+    <img src="assets/icons/arrow-right.svg" alt="More details" />
+  </a>`,
   styleUrls: ['./sites-open.component.scss'],
 })
 export class SitesOpenComponent implements ICellRendererAngularComp {
