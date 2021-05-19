@@ -16,29 +16,7 @@ import { ProjectStateService } from '../shared/services/project-state/project-st
 
 @Component({
   selector: 'app-grid',
-  template: ` <label>
-      <input
-        type="text"
-        id="filter-text-box"
-        placeholder="Filter..."
-        [formControl]="filterText"
-        (input)="onFilterTextBoxChanged()"
-      />
-    </label>
-    <ag-grid-angular
-      style="width: 100%; height: 500px;"
-      class="ag-theme-alpine"
-      [rowData]="rowData"
-      [columnDefs]="columnDefs"
-      [gridOptions]="gridOptions"
-      [frameworkComponents]="frameworkComponents"
-      [pagination]="true"
-      [paginationPageSize]="paginationPageSize"
-      (gridReady)="onGridReady($event)"
-      [getRowHeight]="getRowHeight"
-      (cellClicked)="cellClicked($event)"
-    >
-    </ag-grid-angular>`,
+  templateUrl: './grid.component.html',
   styleUrls: ['./grid.component.scss'],
 })
 export class GridComponent implements OnInit {

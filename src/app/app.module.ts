@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [AppComponent, GridComponent, SiteComponent],
@@ -20,6 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     MatCardModule,
     MatButtonModule,
+    MatInputModule,
     RouterModule.forRoot([
       { path: '', component: GridComponent, pathMatch: 'full' },
       { path: 'site', component: SiteComponent },
