@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
@@ -113,6 +113,11 @@ export class GridComponent implements OnInit {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.gridOptions.api.sizeColumnsToFit();
+    this.gridApi.sizeColumnsToFit();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
     this.gridApi.sizeColumnsToFit();
   }
 }
