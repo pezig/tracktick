@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
@@ -20,6 +20,7 @@ import { ProjectStateService } from '../shared/services/project-state/project-st
   styleUrls: ['./grid.component.scss'],
 })
 export class GridComponent implements OnInit {
+  @ViewChild('grid') grid: HTMLElement = null;
   rowData: Site[] = null;
   gridOptions: GridOptions | null = null;
   frameworkComponents: any = null;
@@ -55,7 +56,7 @@ export class GridComponent implements OnInit {
   }
 
   columnDefs = [
-    { field: 'title', width: '5%' },
+    { field: 'title', width: this.columnWidth(25) },
     {
       field: 'clientId',
       cellRenderer: 'siteInfo',
@@ -76,13 +77,13 @@ export class GridComponent implements OnInit {
           site.contacts.main.lastName
         );
       },
-      width: '80%',
+      width: this.columnWidth(75),
     },
     {
       field: '',
       hide: true,
       cellRenderer: 'siteOpen',
-      width: '10px',
+      width: 10,
       cellStyle: {
         padding: '18px 0px',
       },
@@ -91,6 +92,14 @@ export class GridComponent implements OnInit {
 
   onFilterTextBoxChanged() {
     this.gridOptions.api.setQuickFilter(this.filterText.value);
+  }
+
+  columnWidth(percentage: number): number {
+    let width: number = percentage;
+    if (this.grid) {
+      width = (this.grid.clientWidth * percentage) / 100; // Pixel calculation
+    }
+    return width;
   }
 
   cellClicked(params) {

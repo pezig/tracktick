@@ -6,8 +6,9 @@ import { AgGridModule } from 'ag-grid-angular';
 import { MockSite } from '../shared/mocks/mocktracktick.models';
 import { ProjectStateService } from '../shared/services/project-state/project-state.service';
 import { SiteComponent } from '../site/site.component';
-
+import { MatInputModule } from '@angular/material/input';
 import { GridComponent } from './grid.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('GridComponent', () => {
   let component: GridComponent;
@@ -21,6 +22,8 @@ describe('GridComponent', () => {
         HttpClientTestingModule,
         AgGridModule,
         ReactiveFormsModule,
+        MatInputModule,
+        BrowserAnimationsModule,
         RouterModule.forRoot([
           { path: '', component: GridComponent, pathMatch: 'full' },
           { path: 'site', component: SiteComponent },
