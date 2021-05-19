@@ -1,10 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ColumnApi, GridApi, GridOptions } from 'ag-grid-community';
+import { Router } from '@angular/router';
+import {
+  CellClickedEvent,
+  Column,
+  ColumnApi,
+  GridApi,
+  GridOptions,
+} from 'ag-grid-community';
 import { Site } from '../shared/models/tracktick.models';
 import { SitesInfoComponent } from '../shared/renderers/sites/sites-info/sites-info.component';
 import { SitesOpenComponent } from '../shared/renderers/sites/sites-open/sites-open.component';
 import { DataService } from '../shared/services/data/data.service';
+import { ProjectStateService } from '../shared/services/project-state/project-state.service';
 
 @Component({
   selector: 'app-grid',
@@ -28,6 +36,7 @@ import { DataService } from '../shared/services/data/data.service';
       [paginationPageSize]="paginationPageSize"
       (gridReady)="onGridReady($event)"
       [getRowHeight]="getRowHeight"
+      (cellClicked)="cellClicked($event)"
     >
     </ag-grid-angular>`,
   styleUrls: ['./grid.component.scss'],
@@ -41,7 +50,11 @@ export class GridComponent implements OnInit {
   paginationPageSize = 50;
   filterText: FormControl = null;
 
-  constructor(private dataService: DataService) {}
+  constructor(
+    private dataService: DataService,
+    public router: Router,
+    private projectStateService: ProjectStateService
+  ) {}
 
   ngOnInit() {
     this.dataService.getSites().then((data: Site[]) => {
@@ -94,11 +107,21 @@ export class GridComponent implements OnInit {
       cellStyle: {
         padding: '18px 0px',
       },
+      cellClicked: (params) => {
+        console.log(params);
+      },
     },
   ];
 
   onFilterTextBoxChanged() {
     this.gridOptions.api.setQuickFilter(this.filterText.value);
+  }
+
+  cellClicked(params) {
+    if (params.colDef.cellRenderer == 'siteOpen') {
+      this.projectStateService.setSiteDetail(params.data);
+      this.router.navigateByUrl('/site');
+    }
   }
 
   onGridReady(params) {

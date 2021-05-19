@@ -26,10 +26,4 @@ describe('SitesOpenComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('should set sites data', () => {
-    const params = { data: MockSite };
-    component.agInit(params);
-    expect(component.site).toBeTruthy();
-  });
 });
