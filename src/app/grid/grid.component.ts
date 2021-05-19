@@ -80,13 +80,11 @@ export class GridComponent implements OnInit {
     },
     {
       field: '',
+      hide: true,
       cellRenderer: 'siteOpen',
       width: '10px',
       cellStyle: {
         padding: '18px 0px',
-      },
-      cellClicked: (params) => {
-        console.log(params);
       },
     },
   ];
@@ -96,7 +94,7 @@ export class GridComponent implements OnInit {
   }
 
   cellClicked(params) {
-    if (params.colDef.cellRenderer == 'siteOpen') {
+    if (params.colDef.field == 'clientId') {
       this.projectStateService.setSiteDetail(params.data);
       this.router.navigateByUrl('/site');
     }

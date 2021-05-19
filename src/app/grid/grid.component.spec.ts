@@ -49,7 +49,7 @@ describe('GridComponent', () => {
     const params = {
       data: MockSite,
       colDef: {
-        cellRenderer: 'siteOpen',
+        field: 'clientId',
       },
     };
     const navigateSpy = spyOn(component.router, 'navigateByUrl');

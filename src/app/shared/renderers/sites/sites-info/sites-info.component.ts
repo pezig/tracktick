@@ -6,9 +6,16 @@ import { Site } from 'src/app/shared/models/tracktick.models';
 @Component({
   selector: 'app-sites-info',
   template: `
-    <div>{{ siteName }}</div>
-    <div>{{ siteAddress }}</div>
-    <div>{{ mainContact }}</div>
+    <div class="container">
+      <div class="text">
+        <div>{{ siteName }}</div>
+        <div>{{ siteAddress }}</div>
+        <div>{{ mainContact }}</div>
+      </div>
+      <div class="link">
+        <img src="assets/icons/arrow-right.svg" alt="More details" />
+      </div>
+    </div>
   `,
   styleUrls: ['./sites-info.component.scss'],
 })
