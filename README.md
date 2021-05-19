@@ -6,11 +6,11 @@ Run `npm i` to download the dependencies
 
 ## JSON Server
 
-Run `json-server -w db.json` to start the database server at `http://localhost:3000/`
+Run `npm run server` to start the database server at `http://localhost:3000/`
 
-## Development server
+## Angular
 
-Run `npm run start` for a dev server. Navigate to `http://localhost:4200/`
+Run `npm run start` to start angular. Navigate to `http://localhost:4200/`
 
 ## Running unit tests
 
