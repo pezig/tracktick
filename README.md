@@ -1,5 +1,9 @@
 # Tracktick
 
+## Setup
+
+Run `npm i` to download the dependencies
+
 ## JSON Server
 
 Run `json-server -w db.json` to start the database server at `http://localhost:3000/`
