@@ -2,6 +2,8 @@
 
 ## Setup
 
+This project requires [Node](https://nodejs.org/en/download/)
+
 Run `npm i` to download the dependencies
 
 ## JSON Server
