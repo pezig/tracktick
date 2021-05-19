@@ -9,7 +9,7 @@ import { Site } from 'src/app/shared/models/tracktick.models';
   styleUrls: ['./sites-open.component.scss'],
 })
 export class SitesOpenComponent implements ICellRendererAngularComp {
-  private site: Site | null = null;
+  site: Site | null = null;
   constructor(
     private router: Router,
     private projectStateService: ProjectStateService

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router, RouterModule } from '@angular/router';
 import { GridComponent } from 'src/app/grid/grid.component';
+import { MockSite } from 'src/app/shared/mocks/mocktracktick.models';
 import { ProjectStateService } from 'src/app/shared/services/project-state/project-state.service';
 import { SitesOpenComponent } from './sites-open.component';
 
@@ -11,16 +12,8 @@ describe('SitesOpenComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [SitesOpenComponent],
-      imports: [
-        RouterModule.forRoot([
-          {
-            path: '',
-            component: GridComponent,
-            pathMatch: 'full',
-          },
-        ]),
-      ],
-      providers: [Router, ProjectStateService],
+      imports: [RouterModule.forRoot([])],
+      providers: [ProjectStateService],
     }).compileComponents();
   });
 
@@ -32,5 +25,11 @@ describe('SitesOpenComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should set sites data', () => {
+    const params = { data: MockSite };
+    component.agInit(params);
+    expect(component.site).toBeTruthy();
   });
 });

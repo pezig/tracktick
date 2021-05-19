@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { GridApi, GridOptions } from 'ag-grid-community';
+import { ColumnApi, GridApi, GridOptions } from 'ag-grid-community';
 import { Site } from '../shared/models/tracktick.models';
 import { SitesInfoComponent } from '../shared/renderers/sites/sites-info/sites-info.component';
 import { SitesOpenComponent } from '../shared/renderers/sites/sites-open/sites-open.component';
@@ -37,7 +37,7 @@ export class GridComponent implements OnInit {
   gridOptions: GridOptions | null = null;
   frameworkComponents: any = null;
   gridApi: GridApi | null = null;
-  gridColumnApi = null;
+  gridColumnApi: ColumnApi | null = null;
   paginationPageSize = 50;
   filterText: FormControl = null;
 

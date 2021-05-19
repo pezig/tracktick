@@ -1,5 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 import { AgGridModule } from 'ag-grid-angular';
 
 import { GridComponent } from './grid.component';
@@ -11,7 +12,7 @@ describe('GridComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [GridComponent],
-      imports: [HttpClientTestingModule, AgGridModule],
+      imports: [HttpClientTestingModule, AgGridModule, ReactiveFormsModule],
     }).compileComponents();
   });
 

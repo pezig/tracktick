@@ -1,12 +1,14 @@
-<ag-grid-angular
-  style="width: 500px; height: 400px"
-  class="ag-theme-alpine"
-  [rowData]="rowData"
-  [columnDefs]="columnDefs"
-  [frameworkComponents]="frameworkComponents"
-  [pagination]="true"
-  [paginationPageSize]="paginationPageSize"
-  (gridReady)="onGridReady($event)"
-  [getRowHeight]="getRowHeight"
->
-</ag-grid-angular>
+<div class="box">
+  <ag-grid-angular
+    style="width: 500px; height: 400px"
+    class="ag-theme-alpine"
+    [rowData]="rowData"
+    [columnDefs]="columnDefs"
+    [frameworkComponents]="frameworkComponents"
+    [pagination]="true"
+    [paginationPageSize]="paginationPageSize"
+    (gridReady)="onGridReady($event)"
+    [getRowHeight]="getRowHeight"
+  >
+  </ag-grid-angular>
+</div>
