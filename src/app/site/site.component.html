@@ -1,29 +1,39 @@
 <mat-card class="card">
-  <a routerLink="/">
+  <a routerLink="/" class="back-button">
     <mat-card-content>
       <img src="assets/icons/arrow-left.svg" alt="Click to go back" />
     </mat-card-content>
   </a>
   <mat-card-content>
+    <img mat-card-avatar src="assets/icons/city-image.jpg" />
+
     <mat-card-title>{{ site.title }}</mat-card-title>
   </mat-card-content>
   <mat-card-content>
-    <img src="assets/icons/person-badge.svg" />
-    {{ site.contacts.main.firstName + " " + site.contacts.main.lastName }}
-    <br />
-    <small> {{ site.contacts.main.jobTitle }} </small>
+    <img src="assets/icons/person-badge.svg" class="card-image" />
+    <div class="card-text">
+      {{ site.contacts.main.firstName + " " + site.contacts.main.lastName }}
+      <br />
+      <div class="card-text-sm">
+        {{ site.contacts.main.jobTitle }}
+      </div>
+    </div>
   </mat-card-content>
   <mat-card-content>
-    <img src="assets/icons/telephone-fill.svg" />
-    {{ site.contacts.main.phoneNumber }}
+    <img src="assets/icons/telephone-fill.svg" class="card-image" />
+    <div class="card-text">
+      {{ site.contacts.main.phoneNumber }}
+    </div>
   </mat-card-content>
   <mat-card-content>
-    <img src="assets/icons/envelope.svg" />
-    {{ site.contacts.main.email }}
+    <img src="assets/icons/envelope.svg" class="card-image" />
+    <div class="card-text">
+      {{ site.contacts.main.email }}
+    </div>
   </mat-card-content>
   <mat-card-content>
-    <img src="assets/icons/pin-map.svg" />
-    <div>
+    <img src="assets/icons/pin-map.svg" class="card-image" />
+    <div class="card-text">
       {{ address.street }}
       <br />
       {{ address.city + ", " + address.state + ", " + address.country }}

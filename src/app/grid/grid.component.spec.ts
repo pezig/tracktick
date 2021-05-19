@@ -1,4 +1,6 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { AgGridModule } from 'ag-grid-angular';
 
 import { GridComponent } from './grid.component';
 
@@ -8,9 +10,9 @@ describe('GridComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GridComponent ]
-    })
-    .compileComponents();
+      declarations: [GridComponent],
+      imports: [HttpClientTestingModule, AgGridModule],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -21,5 +23,9 @@ describe('GridComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should return row height', () => {
+    expect(component.getRowHeight(null)).toBeTruthy();
   });
 });
